@@ -1,18 +1,38 @@
-group: com.ankurpathak.github
-name: gradle-test
-version: '1.0.0-SNAPSHOT'
+buildscript {
+    ext{
+        shadowPluginVer = '4.0.2'
+    }
+    repositories {
+        jcenter()
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:${shadowPluginVer}"
+    }
+}
+
 
 apply plugin: 'java'
+apply plugin: 'maven'
 apply plugin: 'application'
-apply plugin: 'com.github.johnrengelman.shadow'
+//apply plugin: 'com.github.johnrengelman.shadow'
 
+ext{
+    javaVer = '11'
+    jodaTimeVer = '2.10.1'
+}
+
+group = 'com.github.ankurpathak'
+version = '0.0.1-SNAPSHOT'
 sourceCompatibility = "$javaVer"
 targetCompatibility = "$javaVer"
 mainClassName = 'com.github.ankurpathak.HelloWorld'
 
 
-
 repositories {
+    jcenter()
+    mavenLocal()
     mavenCentral()
 }
 
@@ -20,14 +40,6 @@ dependencies {
     compile "joda-time:joda-time:$jodaTimeVer"
 }
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "com.github.jengelman.gradle.plugins:shadow:${shadowPluginVer}"
-    }
-}
 
 jar {
     manifest {
